@@ -20,9 +20,9 @@ def load_model():
     return ResNetWrapper(num_classes=2)
 
 
-def main():
+def main(model):
     st.title("Parent-Child Similarity")
-    model = load_model()
+    
     # Upload parent images
     parent1 = st.file_uploader(
         "Upload Parent 1 Image", type=["jpg", "jpeg", "png"]
@@ -62,4 +62,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    model = load_model()
+    main(model)
