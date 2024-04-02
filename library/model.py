@@ -18,7 +18,7 @@ class ResNetWrapper(nn.Module):
         self.resnet = models.resnet50(pretrained=True)
         self.fc = nn.Linear(2048, num_classes)
 
-    def set_features(self, file1: str, file2: str, child_img: str):
+    def set_features(self, file1, file2, child_img):
         '''
         Extracts features from the images for parents and child,
         and sets them as respective attributes
@@ -32,7 +32,7 @@ class ResNetWrapper(nn.Module):
         Extracts features from an image and returns a tensor
         '''
         if isinstance(img, str):
-            img = convert_to_png(img_path)
+            img = convert_to_png(img)
         img_tensor = F.to_tensor(img)
         img_tensor = torch.unsqueeze(img_tensor, 0)
         features = self.resnet(img_tensor[:, :3, :, :])
