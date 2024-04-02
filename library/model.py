@@ -4,8 +4,12 @@ import torch.nn as nn
 import torchvision.models as models
 from torchvision.transforms import functional as F
 
-sys.path.insert(0, "/Users/ejfel/Documents/Github/which_parent")  # noqa
-from utils.image_loader import convert_to_png # noqa
+try:
+    sys.path.insert(0, '/which_parent')  # noqa
+    from utils.image_loader import ResNetWrapper # noqa
+except ModuleNotFoundError:
+    sys.path.insert(0, '/Users/ejfel/Documents/Github/which_parent')  # noqa
+    from utils.image_loader import ResNetWrapper # noqa
 
 
 class ResNetWrapper(nn.Module):
