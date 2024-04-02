@@ -30,9 +30,9 @@ class ResNetWrapper(nn.Module):
     def extract_features(self, img):
         '''
         Extracts features from an image and returns a tensor
-        '''
                 # if isinstance(img, str):
                 #     img = convert_to_png(img)
+        '''
         img_tensor = F.to_tensor(img)
         img_tensor = torch.unsqueeze(img_tensor, 0)
         features = self.resnet(img_tensor[:, :3, :, :])
