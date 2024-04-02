@@ -15,7 +15,8 @@ except ModuleNotFoundError:
     from library.model import ResNetWrapper # noqa
 
 
-@st.cache(allow_output_mutation=True)
+# @st.cache(allow_output_mutation=True)
+@st.cache_resource 
 def load_model():
     return ResNetWrapper(num_classes=2)
 
