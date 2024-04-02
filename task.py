@@ -49,7 +49,8 @@ def main(model):
             caption=["Parent 1", "Parent 2", "Child"]
         )
 
-        if st.button("Accept"):
+        if st.button("Click Accept to Run"):
+            st.write("<div style='text-align: center;'>Accept</div>", unsafe_allow_html=True)
             # Compute similarity scores
             model.set_features(parent1_img, parent2_img, child_img)
 
