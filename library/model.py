@@ -5,7 +5,7 @@ import torchvision.models as models
 from torchvision.transforms import functional as F
 
 try:
-    sys.path.insert(0, '/which_parent')  # noqa
+    sys.path.insert(0, '/ejfeldman7/which_parent')  # noqa
     from utils.image_loader import ResNetWrapper # noqa
 except ModuleNotFoundError:
     sys.path.insert(0, '/Users/ejfel/Documents/Github/which_parent')  # noqa
