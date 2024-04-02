@@ -27,12 +27,12 @@ class ResNetWrapper(nn.Module):
         self.parent2 = self.extract_features(file2)
         self.child = self.extract_features(child_img)
 
-    def extract_features(self, img) -> torch.Tensor:
+    def extract_features(self, img):
         '''
         Extracts features from an image and returns a tensor
         '''
-        # if isinstance(img, str):
-        #     img = convert_to_png(img)
+                # if isinstance(img, str):
+                #     img = convert_to_png(img)
         img_tensor = F.to_tensor(img)
         img_tensor = torch.unsqueeze(img_tensor, 0)
         features = self.resnet(img_tensor[:, :3, :, :])
