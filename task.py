@@ -36,11 +36,11 @@ def main(model):
 
     if parent1 and parent2 and child:
         # Display the uploaded images
-        parent1_img = Image.open(parent1).convert("RGB")
+        parent1_img = Image.open(parent1)
         logger.info(f"Parent 1 image: {parent1} of type {type(parent1_img)}")
-        parent2_img = Image.open(parent2).convert("RGB")
+        parent2_img = Image.open(parent2)
         logger.info(f"Parent 2 image: {parent2} of type {type(parent2_img)}")
-        child_img = Image.open(child).convert("RGB")
+        child_img = Image.open(child)
         logger.info(f"Child image: {child} of type {type(child_img)}")
 
         st.image(
