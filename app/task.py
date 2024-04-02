@@ -4,7 +4,7 @@ from PIL import Image
 
 try:
     # sys.path.insert(0, 'ejfeldman7/which_parent')  # noqa
-    from ..library.model import ResNetWrapper # noqa
+    from library.model import ResNetWrapper # noqa
 except ModuleNotFoundError:
     sys.path.insert(0, '/Users/ejfel/Documents/Github/which_parent')  # noqa
     from library.model import ResNetWrapper # noqa
