@@ -32,9 +32,9 @@ class ResNetWrapper(nn.Module):
         Extracts features from an image and returns a tensor
         '''
         img_tensor = F.to_tensor(img)
-        img_tensor = torch.unsqueeze(img_tensor, 0)
-        features = self.resnet(img_tensor[:, :3, :, :])
-        return features
+        self.img_tensor = torch.unsqueeze(img_tensor, 0)
+        self.features = self.resnet(self.img_tensor[:, :3, :, :])
+        return self.features
 
     def get_similarities(self) -> str:
         '''

@@ -51,7 +51,7 @@ def main(model):
         if st.button("Accept"):
             # Compute similarity scores
             try:
-                model.set_features(parent1_img, parent2_img, child_img)
+                model.set_features(parent1, parent2, child)
             except Exception as e:
                 logger.error(f"Error setting features: {e}")
                 st.write(f"Error setting features, got {e}")
