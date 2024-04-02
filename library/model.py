@@ -47,7 +47,7 @@ class ResNetWrapper(nn.Module):
         # Determine which original picture the comparison is most similar to
         if self.similarity1 > self.similarity2:
             self.likeness = "parent1"
-            return "Child is most similar to Parent in picture 1", self.similarity1, self.similarity2 
+            return ("Child is most similar to Parent in picture 1", self.similarity1, self.similarity2)
         else:
             self.likeness = "parent2"
-            return "Child is most similar to Parent in picture 2", self.similarity1, self.similarity2 
+            return ("Child is most similar to Parent in picture 2", self.similarity1, self.similarity2)
