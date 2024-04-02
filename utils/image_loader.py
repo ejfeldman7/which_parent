@@ -1,5 +1,6 @@
 from PIL import Image
 
+
 def convert_to_png(file_path: str) -> Image.Image:
     '''
     Convert file path to PNG format

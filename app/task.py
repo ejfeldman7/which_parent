@@ -1,8 +1,9 @@
+import sys
 import streamlit as st
 from PIL import Image
 
 sys.path.insert(0, '/Users/ejfel/Documents/Github/which_parent')  # noqa
-from library.model import ResNetWrapper
+from library.model import ResNetWrapper # noqa
 
 
 @st.cache(allow_output_mutation=True)
@@ -31,6 +32,7 @@ def main():
 
         # Determine the most similar parent
         st.write(outcome)
+
 
 if __name__ == "__main__":
     model = ResNetWrapper(num_classes=2)

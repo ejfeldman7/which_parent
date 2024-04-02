@@ -5,7 +5,7 @@ import torchvision.models as models
 from torchvision.transforms import functional as F
 
 sys.path.insert(0, "/Users/ejfel/Documents/Github/which_parent")  # noqa
-from utils.image_loader import convert_to_png
+from utils.image_loader import convert_to_png # noqa
 
 
 class ResNetWrapper(nn.Module):
@@ -16,7 +16,7 @@ class ResNetWrapper(nn.Module):
 
     def set_features(self, file1: str, file2: str, child_img: str):
         '''
-        Extracts features from the images for parents and child, 
+        Extracts features from the images for parents and child,
         and sets them as respective attributes
         '''
         self.parent1 = self.extract_features(file1)
