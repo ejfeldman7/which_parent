@@ -41,13 +41,13 @@ class ResNetWrapper(nn.Module):
         Computes the cosine similar of the child image with the parent images.
         Returns which parent has the greatest similarity to the child.
         '''
-        self.similarity1 = torch.cosine_similarity(self.child, self.parent1, dim=1)
-        self.similarity2 = torch.cosine_similarity(self.child, self.parent2, dim=1)
+        similarity1 = torch.cosine_similarity(self.child, self.parent1, dim=1)
+        similarity2 = torch.cosine_similarity(self.child, self.parent2, dim=1)
 
         # Determine which original picture the comparison is most similar to
-        if self.similarity1 > self.similarity2:
+        if similarity1 > similarity2:
             self.likeness = "parent1"
-            return ("Child is most similar to Parent in picture 1", self.similarity1, self.similarity2)
+            return ("Child is most similar to Parent in picture 1", similarity1, similarity2)
         else:
             self.likeness = "parent2"
-            return ("Child is most similar to Parent in picture 2", self.similarity1, self.similarity2)
+            return ("Child is most similar to Parent in picture 2", similarity1, similarity2)
