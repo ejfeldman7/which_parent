@@ -52,7 +52,7 @@ def main():
             # Compute similarity scores
             try:
                 model.set_features(parent1_img, parent2_img, child_img)
-            except Error as e:
+            except Exception as e:
                 logger.error(f"Error: {e}")
 
             outcome = model.get_similarities()
