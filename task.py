@@ -53,7 +53,10 @@ def main(model):
             try:
                 model.set_features(parent1_img, parent2_img, child_img)
             except Exception as e:
-                logger.error(f"Error: {e}")
+                logger.error(f"Error setting features: {e}")
+                st.write(f"Error setting features, got {e}")
+                raise e
+                
 
             outcome = model.get_similarities()
 
