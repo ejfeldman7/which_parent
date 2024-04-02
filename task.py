@@ -27,20 +27,20 @@ def main():
 
     if parent1 and parent2 and child:
         # Display the uploaded images
-        parent1_img = Image.open(parent1)
-        parent2_img = Image.open(parent2)
-        child_img = Image.open(child)
+        parent1_img = Image.open(parent1).convert("RGB")
+        parent2_img = Image.open(parent2).convert("RGB")
+        child_img = Image.open(child).convert("RGB")
 
         st.image([parent1_img, parent2_img, child_img], caption=["Parent 1", "Parent 2", "Child"])
 
-        # Compute similarity scores
-        model.set_features(parent1_img, parent2_img, child_img)
+        if st.button("Accept"):
+            # Compute similarity scores
+            model.set_features(parent1_img, parent2_img, child_img)
 
-        outcome = model.get_similarities()
+            outcome = model.get_similarities()
 
-        # Determine the most similar parent
-        st.write(outcome)
-
+            # Determine the most similar parent
+            st.write(outcome)
 
 if __name__ == "__main__":
     main()
