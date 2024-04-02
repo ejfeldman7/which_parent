@@ -62,6 +62,8 @@ def main(model):
 
             # Determine the most similar parent
             st.write(outcome)
+            st.write(f"Parent 1 similarity: {model.similarity1}")
+            st.write(f"Parent 2 similarity: {model.similarity2}")
 
 
 if __name__ == "__main__":
