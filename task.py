@@ -11,6 +11,10 @@ except ModuleNotFoundError:
 
 
 @st.cache(allow_output_mutation=True)
+def load_model():
+    return ResNetWrapper(num_classes=2)
+
+
 def main():
     st.title("Parent-Child Similarity")
 
@@ -39,5 +43,5 @@ def main():
 
 
 if __name__ == "__main__":
-    model = ResNetWrapper(num_classes=2)
+    model = load_model()
     main()
