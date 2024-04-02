@@ -15,9 +15,9 @@ def load_model():
     return ResNetWrapper(num_classes=2)
 
 
-def main(model):
+def main():
     st.title("Parent-Child Similarity")
-
+    model = load_model()
     # Upload parent images
     parent1 = st.file_uploader("Upload Parent 1 Image", type=["jpg", "jpeg", "png"])
     parent2 = st.file_uploader("Upload Parent 2 Image", type=["jpg", "jpeg", "png"])
@@ -34,7 +34,7 @@ def main(model):
         st.image([parent1_img, parent2_img, child_img], caption=["Parent 1", "Parent 2", "Child"])
 
         # Compute similarity scores
-        ResNetWrapper.set_features(parent1_img, parent2_img, child_img)
+        model.set_features(parent1_img, parent2_img, child_img)
 
         outcome = model.get_similarities()
 
@@ -43,5 +43,4 @@ def main(model):
 
 
 if __name__ == "__main__":
-    model = load_model()
-    main(model)
+    main()
