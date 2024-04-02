@@ -51,7 +51,7 @@ def main(model):
         if st.button("Accept"):
             # Compute similarity scores
             try:
-                model.set_features(parent1, parent2, child)
+                model.set_features(parent1_img, parent2_img, child_img)
             except Exception as e:
                 logger.error(f"Error setting features: {e}")
                 st.write(f"Error setting features, got {e}")
@@ -60,8 +60,8 @@ def main(model):
 
             outcome = model.get_similarities()
             st.write(outcome)
-            # st.write(f"Parent 1 similarity: {model.similarity1}")
-            # st.write(f"Parent 2 similarity: {model.similarity2}")
+            st.write(f"Parent 1 similarity: {model.similarity1}")
+            st.write(f"Parent 2 similarity: {model.similarity2}")
 
 
 if __name__ == "__main__":
