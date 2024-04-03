@@ -25,14 +25,19 @@ def main(model):
     st.sidebar.write(
     '''
     __About__ \n
-    Just a little proof of concept, more to come?
-    ''')
-
-    st.title("Parent-Child Similarity")
-    '''
     This project was built to help settle those questions about who a child looks more like.  \r\n
     The MVP implementation wraps Resnet50 to produce tensors for all three images.  \r\n
     Those tensors of the parent images are then compared to determine which are "closest" to child. \r\n
+    '''
+    '''
+    \r\n
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
+    [Medium/TDS](https://ethan-feldman.medium.com/) and on his [website](https://www.ejfeldman.com/)  \r\n
+    ''')
+
+    st.title("Which-Parent")
+    '''
+    The Streamlit App using computer vision to answer life's big questions.
     '''
     st.write("Upload two parent images and one child image to determine which parent the child looks more like.")
     # Upload parent images
@@ -66,12 +71,6 @@ def main(model):
             st.write(outcome[0])
             st.write(f"Parent 1 similarity: {outcome[1]}")
             st.write(f"Parent 2 similarity: {outcome[2]}")
-
-    '''
-    \r\n
-    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
-    [Medium/TDS](https://ethan-feldman.medium.com/) and on his [website](https://www.ejfeldman.com/)  \r\n
-    '''
 
 if __name__ == "__main__":
     model = load_model()
