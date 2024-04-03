@@ -22,17 +22,22 @@ def load_model():
 
 
 def main(model):
-    st.title("Parent-Child Similarity")
-    
-    # Upload parent images
-    parent1 = st.file_uploader(
-        "Upload Parent 1 Image", type=["jpg", "jpeg", "png"]
-    )
-    parent2 = st.file_uploader(
-        "Upload Parent 2 Image", type=["jpg", "jpeg", "png"]
-    )
+    st.sidebar.write(
+    '''
+    __About__ \n
+    This project was built from just under 6000 reviews from www.coffeereview.com. The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees.
+    \n
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!
+    ''')
 
-    # Upload child image
+    st.title("Parent-Child Similarity")
+    '''
+    This project was built to help settle those questions about who a child looks more like.  \r\n
+    The MVP implementation wraps Resnet50 to produce tensors for all three images.  \r\n
+    Those tensors of the parent images are then compared to determine which are "closest" to child. \r\n
+    '''
+    st.write("Upload two parent images and one child image to determine which parent the child looks more like.")
+    # Upload parent images
     child = st.file_uploader("Upload Child Image", type=["jpg", "jpeg", "png"])
 
     if parent1 and parent2 and child:
@@ -58,6 +63,12 @@ def main(model):
             st.write(outcome[0])
             st.write(f"Parent 1 similarity: {outcome[1]}")
             st.write(f"Parent 2 similarity: {outcome[2]}")
+    
+     '''
+    \r\n
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
+    [Medium/TDS](https://ethan-feldman.medium.com/) and on his [website](https://www.ejfeldman.com/)  \r\n
+    '''
 
 
 if __name__ == "__main__":
