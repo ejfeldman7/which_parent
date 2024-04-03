@@ -12,6 +12,7 @@ from torchvision.transforms import functional as F
 #     from utils.image_loader import convert_to_png # noqa
 
 
+# TODO: from facenet_pytorch import MTCNN, InceptionResnetV1
 class ResNetWrapper(nn.Module):
     def __init__(self, num_classes: int):
         super(ResNetWrapper, self).__init__()
