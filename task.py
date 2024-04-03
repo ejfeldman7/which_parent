@@ -25,9 +25,7 @@ def main(model):
     st.sidebar.write(
     '''
     __About__ \n
-    This project was built from just under 6000 reviews from www.coffeereview.com. The blind reviews were used to create nine-dimensional flavor vectors for comparisons between coffees.
-    \n
-    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his website (link to come)!
+    Just a little proof of concept, more to come?
     ''')
 
     st.title("Parent-Child Similarity")
