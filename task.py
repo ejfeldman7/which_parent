@@ -2,7 +2,7 @@ import sys
 import logging
 
 from PIL import Image
-import streamlit as st 
+import streamlit as st
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -16,7 +16,7 @@ except ModuleNotFoundError:
 
 
 # @st.cache(allow_output_mutation=True)
-@st.cache_resource 
+@st.cache_resource
 def load_model():
     return ResNetWrapper(num_classes=2)
 
@@ -38,6 +38,12 @@ def main(model):
     '''
     st.write("Upload two parent images and one child image to determine which parent the child looks more like.")
     # Upload parent images
+    parent1 = st.file_uploader(
+        "Upload Parent 1 Image", type=["jpg", "jpeg", "png"]
+    )
+    parent2 = st.file_uploader(
+        "Upload Parent 2 Image", type=["jpg", "jpeg", "png"]
+    )
     child = st.file_uploader("Upload Child Image", type=["jpg", "jpeg", "png"])
 
     if parent1 and parent2 and child:
@@ -63,13 +69,12 @@ def main(model):
             st.write(outcome[0])
             st.write(f"Parent 1 similarity: {outcome[1]}")
             st.write(f"Parent 2 similarity: {outcome[2]}")
-    
-     '''
+
+    '''
     \r\n
     This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
     [Medium/TDS](https://ethan-feldman.medium.com/) and on his [website](https://www.ejfeldman.com/)  \r\n
     '''
-
 
 if __name__ == "__main__":
     model = load_model()
