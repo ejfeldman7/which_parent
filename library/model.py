@@ -1,4 +1,3 @@
-import streamlit as st # noqa
 import torch
 import torch.nn as nn
 import torchvision.models as models
@@ -30,7 +29,6 @@ class ResNetWrapper(nn.Module):
         features = self.resnet(img_tensor[:, :3, :, :])
         return features
 
-    @st.cache_resource
     def import_resnet(self):
         self.resnet = models.resnet50(pretrained=True)
 
