@@ -77,14 +77,14 @@ def main():
         )
 
         if st.button("Click Accept to Run"):
-            st.write("Generating features from images...")
             model = load_model()
+            st.write("Generating features from images...")
             family_values = FamilyValues(parent1_img, parent2_img, child_img, model)
-
             st.success("Features set for all images! Getting similarity scores...")
             outcome = model.get_similarities(family_values.child, family_values.parent1, family_values.parent2)
             st.success("Similarity scores calculated, results:")
             st.write(outcome[0])
+            st.write("\t\t\nSummary of results:\n")
             st.write(f"Parent 1 similarity score for these images: {outcome[1]}")
             st.write(f"Parent 2 similarity score for these images: {outcome[2]}")
 
