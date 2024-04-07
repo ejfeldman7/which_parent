@@ -85,8 +85,8 @@ def main():
             outcome = model.get_similarities(family_values.child, family_values.parent1, family_values.parent2)
             st.success("Similarity scores calculated, results:")
             st.write(outcome[0])
-            st.write(f"Parent 1 similarity: {outcome[1]}")
-            st.write(f"Parent 2 similarity: {outcome[2]}")
+            st.write(f"Parent 1 similarity score for these images: {outcome[1]}")
+            st.write(f"Parent 2 similarity score for these images: {outcome[2]}")
 
         if st.button("Clear Cache"):
             st.cache_resource.clear()

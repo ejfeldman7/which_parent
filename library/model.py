@@ -27,7 +27,6 @@ class ResNetWrapper(nn.Module):
         img_tensor = F.to_tensor(img)
         unsqueezed_tensor = torch.unsqueeze(img_tensor, 0)
         features = self.resnet(unsqueezed_tensor[:, :3, :, :])
-        st.success("Features exptracted and formatted...")
         return features
 
     def import_resnet(self, weights: str = None):
