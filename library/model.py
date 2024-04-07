@@ -3,13 +3,6 @@ import torch.nn as nn
 import torchvision.models as models
 from torchvision.transforms import functional as F
 
-# try:
-#     # sys.path.insert(0, '/ejfeldman7/which_parent')  # noqa
-#     from utils.image_loader import convert_to_png # noqa
-# except ModuleNotFoundError:
-#     sys.path.insert(0, '/Users/ejfel/Documents/Github/which_parent')  # noqa
-#     from utils.image_loader import convert_to_png # noqa
-
 
 # TODO: from facenet_pytorch import MTCNN, InceptionResnetV1
 class ResNetWrapper(nn.Module):
@@ -41,21 +34,15 @@ class ResNetWrapper(nn.Module):
         Computes the cosine similar of the child image with the parent images.
         Returns which parent has the greatest similarity to the child.
         """
-        similarity1 = float(torch.cosine_similarity(self.child, self.parent1, dim=1))
-        similarity2 = float(torch.cosine_similarity(self.child, self.parent2, dim=1))
+        similarity_to_1 = float(torch.cosine_similarity(self.child, self.parent1, dim=1))
+        similarity_to_2 = float(torch.cosine_similarity(self.child, self.parent2, dim=1))
 
-        # Determine which original picture the comparison is most similar to
-        if similarity1 > similarity2:
+        if similarity_to_1 > similarity_to_2:
             self.likeness = "parent1"
-            return (
-                "Child is most similar to Parent in picture 1",
-                similarity1,
-                similarity2,
-            )
         else:
             self.likeness = "parent2"
-            return (
-                "Child is most similar to Parent in picture 2",
-                similarity1,
-                similarity2,
-            )
+        return (
+            f"Child is most similar to {self.likeness}",
+            similarity_to_1,
+            similarity_to_2,
+        )
