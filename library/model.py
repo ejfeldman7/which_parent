@@ -51,11 +51,11 @@ class ResNetWrapper(nn.Module):
         )
 
         if similarity_to_1 > similarity_to_2:
-            likeness = "parent1"
+            likeness = "parent 1"
         else:
-            likeness = "parent2"
+            likeness = "parent 2"
         return (
-            f"Child is most similar to {likeness}",
+            f"Based on these images, this child is most similar to {likeness}",
             similarity_to_1,
             similarity_to_2,
         )
