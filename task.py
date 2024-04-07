@@ -15,9 +15,9 @@ except ModuleNotFoundError:
     from library.model import ResNetWrapper  # noqa
 
 
-@st.cache_resource #(experimental_allow_widgets=True)
+@st.cache_resource  # (experimental_allow_widgets=True)
 def load_model():
-    model = ResNetWrapper(num_classes=2)
+    model = ResNetWrapper(num_classes=2, quantize_model=True, prune_model=True)
     option = None
     # weights = st.checkbox(
     #     "Check to select a different set of weights for ResNet than pretrained:"
@@ -86,7 +86,7 @@ def main():
             st.write(outcome[0])
             st.write(f"Parent 1 similarity: {outcome[1]}")
             st.write(f"Parent 2 similarity: {outcome[2]}")
-        
+
         if st.button("Clear Cache"):
             st.cache_resource.clear()
 
