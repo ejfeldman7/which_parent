@@ -45,6 +45,10 @@ def main():
     The Streamlit App using computer vision to answer life's big questions.
     '''
     st.write("Upload two parent images and one child image to determine which parent the child looks more like.")
+    
+    # Load the model
+    model = load_model()
+    
     # Upload parent images
     parent1 = st.file_uploader(
         "Upload Parent 1 Image", type=["jpg", "jpeg", "png"]
@@ -69,7 +73,6 @@ def main():
         )
 
         if st.button("Click Accept to Run"):
-            model = load_model()
             model.set_features(parent1_img, parent2_img, child_img)
 
             outcome = model.get_similarities()
