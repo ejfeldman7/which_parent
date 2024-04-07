@@ -14,6 +14,15 @@ except ModuleNotFoundError:
     sys.path.insert(0, '/Users/ejfel/Documents/Github/which_parent')  # noqa
     from library.model import ResNetWrapper # noqa
 
+@st.cache_resource(experimental_allow_widgets=True)
+def loan_model():
+    model = ResNetWrapper(num_classes=2)
+    weights = st.checkbox("Check to select a different set of weights for ResNet than pretrained:")
+    if weights:
+        option = st.selectbox("What weights would you like to use for ResNet?",
+        ("DEFAULT", "IMAGENET1K_V1", "IMAGENET1K_V2", "Random", ))
+    model.import_resnet(option if option else None)
+    return model
 
 def main():
     st.sidebar.write(
@@ -58,9 +67,6 @@ def main():
         )
 
         if st.button("Click Accept to Run"):
-            # Compute similarity scores
-            model = ResNetWrapper(num_classes=2)
-            model.import_resnet()
             model.set_features(parent1_img, parent2_img, child_img)
 
             outcome = model.get_similarities()

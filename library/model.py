@@ -1,6 +1,8 @@
+import streamlit as st # noqa
 import torch
 import torch.nn as nn
 import torchvision.models as models
+from torchvision.models import ResNet50_Weights
 from torchvision.transforms import functional as F
 
 
@@ -29,8 +31,14 @@ class ResNetWrapper(nn.Module):
         features = self.resnet(img_tensor[:, :3, :, :])
         return features
 
-    def import_resnet(self):
-        self.resnet = models.resnet50(pretrained=True)
+    def import_resnet(self, weights: str = None):
+        if not weights:
+            self.resnet = models.resnet50()
+            st.success(f"Loaded pretrained ResNet50 from TorchVision!")
+        else:
+            self.resnet = models.resnet50(weights=weights)
+            st.success(f"Loaded ResNet50 from TorchVision with {weights} weights!")
+        
 
     def get_similarities(self) -> str:
         """
