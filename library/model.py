@@ -10,7 +10,7 @@ class ResNetWrapper(nn.Module):
     def __init__(self, num_classes: int):
         super(ResNetWrapper, self).__init__()
         self.num_classes = num_classes
-        self.fc = nn.Linear(2048, self.num_classes)
+        self.fc = nn.Linear(1024, self.num_classes)
 
     def set_features(self, file1, file2, child_img):
         """
