@@ -37,8 +37,8 @@ def main():
         """
     __About__ \n
     This project was built to help settle those questions about who a child looks more like.  \r\n
-    The MVP implementation wraps PyTorch Resnet to produce tensors for all three images.  \r\n
-    Those tensors of the parent images are then compared to determine which are "closest" to child. \r\n
+    The MVP implementation wraps a PyTorch Resnet model to produce tensors for all three images.  \r\n
+    Those tensors of the parent images are then compared to determine which is "closest" to child. \r\n
     """
         """
     \r\n
@@ -47,23 +47,21 @@ def main():
     """
     )
 
-    st.title("Which-Parent")
+    st.title("Which-Parent: Parent-Child Similarity App")
     """
-    The Streamlit App using computer vision to answer life's big questions.
+    A small app to answer a big question.
     """
     st.write(
-        "Upload two parent images and one child image to determine which parent the child looks more like."
+        '''Upload two parent images and one child image.\r\n 
+        The model will run and output scores from 0 (not similar) to 1 (very similar). \r\n
+        Try it with a few different pictures to see how the holds up!'''
     )
 
-    # Load the model
-
-    # Upload parent images
     parent1 = st.file_uploader("Upload Parent 1 Image", type=["jpg", "jpeg", "png"])
     parent2 = st.file_uploader("Upload Parent 2 Image", type=["jpg", "jpeg", "png"])
     child = st.file_uploader("Upload Child Image", type=["jpg", "jpeg", "png"])
 
     if parent1 and parent2 and child:
-        # Display the uploaded images
         parent1_img = Image.open(parent1)
         logger.info(f"Parent 1 image: {parent1} of type {type(parent1_img)}")
         parent2_img = Image.open(parent2)
@@ -84,7 +82,7 @@ def main():
             outcome = model.get_similarities(family_values.child, family_values.parent1, family_values.parent2)
             st.success("Similarity scores calculated, results:")
             st.write(outcome[0])
-            st.write("\t\t\nSummary of results:\n")
+            st.write("\r\nSummary of results:\r\n")
             st.write(f"Parent 1 similarity score for these images: {outcome[1]}")
             st.write(f"Parent 2 similarity score for these images: {outcome[2]}")
 
