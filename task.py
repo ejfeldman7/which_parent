@@ -17,7 +17,7 @@ except ModuleNotFoundError:
 
 @st.cache_resource  # (experimental_allow_widgets=True)
 def load_model():
-    model = ResNetWrapper(num_classes=2, quantize_model=True, prune_model=True)
+    model = ResNetWrapper(num_classes=2, prune_model=True)
     option = None
     # weights = st.checkbox(
     #     "Check to select a different set of weights for ResNet than pretrained:"
@@ -28,6 +28,7 @@ def load_model():
     #         ("DEFAULT", "IMAGENET1K_V1", "IMAGENET1K_V2", "Random"),
     #     )
     model.import_resnet(option if option else None)
+    model.quantize_model()
     return model
 
 

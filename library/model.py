@@ -9,14 +9,12 @@ import torch.quantization
 
 # TODO: from facenet_pytorch import MTCNN, InceptionResnetV1
 class ResNetWrapper(nn.Module):
-    def __init__(self, num_classes: int, quantize_model: bool = False, prune_model: bool = False):
+    def __init__(self, num_classes: int, prune_model: bool = False):
         super(ResNetWrapper, self).__init__()
         self.num_classes = num_classes
         self.fc = nn.Linear(2048, self.num_classes)
         if prune_model:
             prune.l1_unstructured(self.fc, name="weight", amount=0.5)
-        if quantize_model:
-            self.quantize_model()
 
     def quantize_model(self):
         self.resnet = torch.quantization.quantize_dynamic(
