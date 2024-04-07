@@ -25,9 +25,7 @@ class ResNetWrapper(nn.Module):
         Extracts features from an image and returns a tensor
         """
         img_tensor = F.to_tensor(img)
-        st.success("to tensors...")
         unsqueezed_tensor = torch.unsqueeze(img_tensor, 0)
-        st.success("unsqueezed...")
         features = self.resnet(unsqueezed_tensor[:, :3, :, :])
         st.success("Features exptracted and formatted...")
         return features
