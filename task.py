@@ -37,7 +37,7 @@ def main():
         """
     __About__ \n
     This project was built to help settle those questions about who a child looks more like.  \r\n
-    The MVP implementation wraps Resnet50 to produce tensors for all three images.  \r\n
+    The MVP implementation wraps PyTorch Resnet to produce tensors for all three images.  \r\n
     Those tensors of the parent images are then compared to determine which are "closest" to child. \r\n
     """
         """

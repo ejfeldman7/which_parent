@@ -11,7 +11,7 @@ class ResNetWrapper(nn.Module):
     def __init__(self, num_classes: int, prune_model: bool = False):
         super(ResNetWrapper, self).__init__()
         self.num_classes = num_classes
-        self.fc = nn.Linear(2048, self.num_classes)
+        self.fc = nn.Linear(512, self.num_classes)
         if prune_model:
             prune.l1_unstructured(self.fc, name="weight", amount=0.5)
 
@@ -34,11 +34,11 @@ class ResNetWrapper(nn.Module):
 
     def import_resnet(self, weights: str = None):
         if not weights:
-            self.resnet = models.resnet50(pretrained=True)
-            st.success("Loaded pretrained ResNet50 from TorchVision!")
+            self.resnet = models.resnet18(pretrained=True)
+            st.success("Loaded pretrained ResNet from TorchVision!")
         else:
-            self.resnet = models.resnet50(weights=None if weights == "Random" else weights)
-            st.success(f"Loaded ResNet50 from TorchVision with {weights} weights!")
+            self.resnet = models.resnet18(weights=None if weights == "Random" else weights)
+            st.success(f"Loaded ResNet from TorchVision with {weights} weights!")
 
     def get_similarities(self, child, parent1, parent2) -> str:
         """
@@ -71,8 +71,3 @@ class FamilyValues():
         self.parent1 = resnet_wrapper.extract_features(self.parent1_img)
         self.parent2 = resnet_wrapper.extract_features(self.parent2_img)
         self.child = resnet_wrapper.extract_features(self.child_img)
-
-# family = FamilyValues(parent1, parent2, child)
-# resnet_wrapper = ResNetWrapper(num_classes)
-# resnet_wrapper.set_features(family.parent1, family.parent2, family.child)
-# resnet_wrapper.get_similarities()
