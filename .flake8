@@ -1,2 +1,15 @@
 [flake8]
-ignore = E501
+ignore = 
+    E1, # Indentation checking
+    E2, # Whitespace checking
+    E3, # Blank line checking
+    E5, # Line length checking 
+    W1, # Indentation warning
+    W2, # Whitespace warning
+    W3, # Blank line warning
+    W5, # Line length warning
+
+exclude = 
+    .git,
+    .tox,
+    __pycache__
