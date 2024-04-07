@@ -15,18 +15,18 @@ except ModuleNotFoundError:
     from library.model import ResNetWrapper  # noqa
 
 
-@st.cache_resource(experimental_allow_widgets=True)
+@st.cache_resource #(experimental_allow_widgets=True)
 def load_model():
     model = ResNetWrapper(num_classes=2)
     option = None
-    weights = st.checkbox(
-        "Check to select a different set of weights for ResNet than pretrained:"
-    )
-    if weights:
-        option = st.selectbox(
-            "What weights would you like to use for ResNet?",
-            ("DEFAULT", "IMAGENET1K_V1", "IMAGENET1K_V2", "Random"),
-        )
+    # weights = st.checkbox(
+    #     "Check to select a different set of weights for ResNet than pretrained:"
+    # )
+    # if weights:
+    #     option = st.selectbox(
+    #         "What weights would you like to use for ResNet?",
+    #         ("DEFAULT", "IMAGENET1K_V1", "IMAGENET1K_V2", "Random"),
+    #     )
     model.import_resnet(option if option else None)
     return model
 
