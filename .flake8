@@ -11,5 +11,9 @@ ignore =
 
 exclude = 
     .git,
-    .tox,
-    __pycache__
+    __pycache__,
+    exclude = 
+        .git,
+        __pycache__,
+        notebooks/*
+    
