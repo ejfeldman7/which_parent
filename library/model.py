@@ -35,8 +35,7 @@ class ResNetWrapper(nn.Module):
             self.resnet = models.resnet50(pretrained=True)
             st.success("Loaded pretrained ResNet50 from TorchVision!")
         else:
-            weights = None if weights == "Random" else weights
-            self.resnet = models.resnet50(weights=weights)
+            self.resnet = models.resnet50(weights=None if weights == "Random" else weights)
             st.success(f"Loaded ResNet50 from TorchVision with {weights} weights!")
 
     def get_similarities(self) -> str:
@@ -44,7 +43,6 @@ class ResNetWrapper(nn.Module):
         Computes the cosine similar of the child image with the parent images.
         Returns which parent has the greatest similarity to the child.
         """
-        self.resnet = self.load_resnet()
         similarity_to_1 = float(
             torch.cosine_similarity(self.child, self.parent1, dim=1)
         )

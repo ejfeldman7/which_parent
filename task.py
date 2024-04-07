@@ -83,6 +83,9 @@ def main():
             st.write(outcome[0])
             st.write(f"Parent 1 similarity: {outcome[1]}")
             st.write(f"Parent 2 similarity: {outcome[2]}")
+        
+        if st.button("Clear Cache"):
+            st.cache_resource.clear()
 
 
 if __name__ == "__main__":
