@@ -18,6 +18,7 @@ except ModuleNotFoundError:
 @st.cache_resource(experimental_allow_widgets=True)
 def load_model():
     model = ResNetWrapper(num_classes=2)
+    option = None
     weights = st.checkbox(
         "Check to select a different set of weights for ResNet than pretrained:"
     )
