@@ -7,7 +7,6 @@ import torch.nn.utils.prune as prune
 import torch.quantization
 
 
-# TODO: from facenet_pytorch import MTCNN, InceptionResnetV1
 class ResNetWrapper(nn.Module):
     def __init__(self, num_classes: int, prune_model: bool = False):
         super(ResNetWrapper, self).__init__()
@@ -20,18 +19,6 @@ class ResNetWrapper(nn.Module):
         self.resnet = torch.quantization.quantize_dynamic(
             self.resnet, {torch.nn.Linear}, dtype=torch.qint8
         )
-
-    def set_features(self, file1, file2, child_img):
-        """
-        Extracts features from the images for parents and child,
-        and sets them as respective attributes
-        """
-        st.write("Generating features for parent1...")
-        self.parent1 = self.extract_features(file1)
-        st.write("Generating features for parent2...")
-        self.parent2 = self.extract_features(file2)
-        st.write("Generating features for child...")
-        self.child = self.extract_features(child_img)
 
     def extract_features(self, img):
         """
@@ -53,24 +40,39 @@ class ResNetWrapper(nn.Module):
             self.resnet = models.resnet50(weights=None if weights == "Random" else weights)
             st.success(f"Loaded ResNet50 from TorchVision with {weights} weights!")
 
-    def get_similarities(self) -> str:
+    def get_similarities(self, child, parent1, parent2) -> str:
         """
         Computes the cosine similar of the child image with the parent images.
         Returns which parent has the greatest similarity to the child.
         """
         similarity_to_1 = float(
-            torch.cosine_similarity(self.child, self.parent1, dim=1)
+            torch.cosine_similarity(child, parent1, dim=1)
         )
         similarity_to_2 = float(
-            torch.cosine_similarity(self.child, self.parent2, dim=1)
+            torch.cosine_similarity(child, parent2, dim=1)
         )
 
         if similarity_to_1 > similarity_to_2:
-            self.likeness = "parent1"
+            likeness = "parent1"
         else:
-            self.likeness = "parent2"
+            likeness = "parent2"
         return (
-            f"Child is most similar to {self.likeness}",
+            f"Child is most similar to {likeness}",
             similarity_to_1,
             similarity_to_2,
         )
+
+
+class FamilyValues():
+    def __init__(self, parent1_img, parent2_img, child_img, resnet_wrapper: ResNetWrapper):
+        self.parent1_img = parent1_img
+        self.parent2_img = parent2_img
+        self.child_img = child_img
+        self.parent1 = resnet_wrapper.extract_features(self.parent1_img)
+        self.parent2 = resnet_wrapper.extract_features(self.parent2_img)
+        self.child = resnet_wrapper.extract_features(self.child_img)
+
+# family = FamilyValues(parent1, parent2, child)
+# resnet_wrapper = ResNetWrapper(num_classes)
+# resnet_wrapper.set_features(family.parent1, family.parent2, family.child)
+# resnet_wrapper.get_similarities()

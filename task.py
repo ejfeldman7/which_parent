@@ -9,10 +9,10 @@ logger = logging.getLogger(__name__)
 
 try:
     sys.path.insert(0, "/ejfeldman7/which_parent")  # noqa
-    from library.model import ResNetWrapper  # noqa
+    from library.model import ResNetWrapper, FamilyValues  # noqa
 except ModuleNotFoundError:
     sys.path.insert(0, "/Users/ejfel/Documents/Github/which_parent")  # noqa
-    from library.model import ResNetWrapper  # noqa
+    from library.model import ResNetWrapper, FamilyValues  # noqa
 
 
 @st.cache_resource  # (experimental_allow_widgets=True)
@@ -56,7 +56,7 @@ def main():
     )
 
     # Load the model
-    
+
     # Upload parent images
     parent1 = st.file_uploader("Upload Parent 1 Image", type=["jpg", "jpeg", "png"])
     parent2 = st.file_uploader("Upload Parent 2 Image", type=["jpg", "jpeg", "png"])
@@ -79,9 +79,10 @@ def main():
         if st.button("Click Accept to Run"):
             st.write("Generating features from images...")
             model = load_model()
-            model.set_features(parent1_img, parent2_img, child_img)
+            family_values = FamilyValues(parent1_img, parent2_img, child_img, model)
+
             st.success("Features set for all images! Getting similarity scores...")
-            outcome = model.get_similarities()
+            outcome = model.get_similarities(family_values.child, family_values.parent1, family_values.parent2)
             st.success("Similarity scores calculated, results:")
             st.write(outcome[0])
             st.write(f"Parent 1 similarity: {outcome[1]}")
