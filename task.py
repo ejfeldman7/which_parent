@@ -2,7 +2,7 @@ import sys
 import logging
 
 from PIL import Image
-import streamlit as st
+import streamlit as st # noqa
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -15,13 +15,7 @@ except ModuleNotFoundError:
     from library.model import ResNetWrapper # noqa
 
 
-@st.cache(allow_output_mutation=True)
-# @st.cache_resource
-def load_model():
-    return ResNetWrapper(num_classes=2)
-
-
-def main(model):
+def main():
     st.sidebar.write(
     '''
     __About__ \n
@@ -65,6 +59,8 @@ def main(model):
 
         if st.button("Click Accept to Run"):
             # Compute similarity scores
+            model = ResNetWrapper(num_classes=2)
+            model.import_resnet()
             model.set_features(parent1_img, parent2_img, child_img)
 
             outcome = model.get_similarities()
@@ -74,5 +70,4 @@ def main(model):
 
 
 if __name__ == "__main__":
-    model = load_model()
-    main(model)
+    main()
