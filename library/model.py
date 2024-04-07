@@ -17,8 +17,11 @@ class ResNetWrapper(nn.Module):
         Extracts features from the images for parents and child,
         and sets them as respective attributes
         """
+        st.write("Generating features for parent1...")
         self.parent1 = self.extract_features(file1)
+        st.write("Generating features for parent2...")
         self.parent2 = self.extract_features(file2)
+        st.write("Generating features for child...")
         self.child = self.extract_features(child_img)
 
     def extract_features(self, img):
@@ -26,8 +29,11 @@ class ResNetWrapper(nn.Module):
         Extracts features from an image and returns a tensor
         """
         img_tensor = F.to_tensor(img)
+        st.success("to tensors...")
         img_tensor = torch.unsqueeze(img_tensor, 0)
+        st.success("unsqueezed...")
         features = self.resnet(img_tensor[:, :3, :, :])
+        st.success("Features exptracted and formatted...")
         return features
 
     def import_resnet(self, weights: str = None):
