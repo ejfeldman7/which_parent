@@ -1,4 +1,4 @@
-import streamlit as st # noqa
+import streamlit as st  # noqa
 import torch
 import torch.nn as nn
 import torchvision.models as models
@@ -32,9 +32,10 @@ class ResNetWrapper(nn.Module):
 
     def import_resnet(self, weights: str = None):
         if not weights:
-            self.resnet = models.resnet50()
+            self.resnet = models.resnet50(pretrained=True)
             st.success("Loaded pretrained ResNet50 from TorchVision!")
         else:
+            weights = None if weights == "Random" else weights
             self.resnet = models.resnet50(weights=weights)
             st.success(f"Loaded ResNet50 from TorchVision with {weights} weights!")
 
@@ -44,8 +45,12 @@ class ResNetWrapper(nn.Module):
         Returns which parent has the greatest similarity to the child.
         """
         self.resnet = self.load_resnet()
-        similarity_to_1 = float(torch.cosine_similarity(self.child, self.parent1, dim=1))
-        similarity_to_2 = float(torch.cosine_similarity(self.child, self.parent2, dim=1))
+        similarity_to_1 = float(
+            torch.cosine_similarity(self.child, self.parent1, dim=1)
+        )
+        similarity_to_2 = float(
+            torch.cosine_similarity(self.child, self.parent2, dim=1)
+        )
 
         if similarity_to_1 > similarity_to_2:
             self.likeness = "parent1"
