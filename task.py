@@ -72,6 +72,7 @@ def main(model):
             st.write(f"Parent 1 similarity: {outcome[1]}")
             st.write(f"Parent 2 similarity: {outcome[2]}")
 
+
 if __name__ == "__main__":
     model = load_model()
     main(model)
